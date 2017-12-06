@@ -14,6 +14,33 @@ document.addEventListener('DOMContentLoaded',function(){
         }
 
         handleClickNext = () => {
+            this.clearTimers();
+            this.showNextSlide();
+            //start slide show
+            this.mainSlideShow = setInterval(()=>{
+                this.showNextSlide();
+            },1500);
+        }
+
+        handleClickPrev = () => {
+            this.clearTimers();
+            if(this.state.counter===1){
+                this.setState({
+                    counter:this.props.numberOfImages
+                });
+            } else {
+                this.setState({
+                    counter:this.state.counter - 1
+                });
+            }
+            //start slide show
+            this.mainSlideShow = setInterval(()=>{
+                this.showNextSlide();
+            },1500);
+        }
+
+
+        showNextSlide = () => {
             if(this.state.counter===this.props.numberOfImages){
                 this.setState({
                     counter:1
@@ -25,16 +52,20 @@ document.addEventListener('DOMContentLoaded',function(){
             }
         }
 
-        handleClickPrev = () => {
-            if(this.state.counter===1){
-                this.setState({
-                    counter:this.props.numberOfImages
-                });
-            } else {
-                this.setState({
-                    counter:this.state.counter - 1
-                });
-            }
+        clearTimers = () => {
+            clearInterval(this.initSlideShow);
+            clearInterval(this.mainSlideShow);
+        }
+
+        componentDidMount(){
+            //start init slide show
+            this.initSlideShow = setInterval(()=>{
+                this.showNextSlide();
+            },1500);
+        }
+
+        componentWillUnmount(){
+            this.clearTimers();
         }
 
         render(){

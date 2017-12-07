@@ -60,16 +60,10 @@
     font-family: Arial;
 }
 
-.slider__list {
-    list-style: none;
-    display: inline-block;
-    .slider__item{
-        @extend %flexCol;
-        > img {
-            border-radius: 50px;
-            border: 1px solid black;
-            max-width: 100%;
-            height: auto;
-        }
-    }
+
+.slider__slideContent {
+    border-radius: 50px;
+    border: 1px solid black;
+    max-width: 100%;
+    height: auto;
 }

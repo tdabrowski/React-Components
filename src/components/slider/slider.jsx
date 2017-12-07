@@ -26,33 +26,7 @@ document.addEventListener('DOMContentLoaded',function(){
     class SingleSlide extends React.Component{
         render(){
             return(
-                <li className='slider__item' style={{display:this.props.display}}>
-                    <img src={this.props.path}></img>
-                </li>
-            );
-        }
-    }
-
-
-    //Slides list
-    class SlideList extends React.Component{
-        render(){
-            let items = [];
-            for(let i=1; i <= this.props.itemsNumber; i++){
-                let path=`${this.props.path}${i}.${this.props.type}`;
-                if(i===this.props.counter){
-                    items.push(
-                        <SingleSlide key={i} path={path} display='flex'/>
-                    );
-                } else {items.push(
-                        <SingleSlide key={i} path={path} display='none'/>
-                    );
-                }
-            }
-            return(
-                <ul className='slider__list'>
-                    {items}
-                </ul>
+                <img className='slider__slideContent' src={this.props.path}></img>
             );
         }
     }
@@ -119,6 +93,7 @@ document.addEventListener('DOMContentLoaded',function(){
             this.clearTimers();
         }
         render(){
+            let pathToImage=`${this.props.path}${this.state.counter}.${this.props.type}`;
             return(
                 <section className='slider'>
                     <div key='slider-container' className='slider__container'>
@@ -127,7 +102,7 @@ document.addEventListener('DOMContentLoaded',function(){
                                 <SliderButton key='buttonPrev' onClick={this.handleClickPrev} text="&lt;"/>
                             </div>
                             <div key='slider-col2' className='slider__col-sm8'>
-                                <SlideList counter={this.state.counter} itemsNumber={this.props.numberOfImages} path={this.props.path} type={this.props.type}/>
+                                <SingleSlide path={pathToImage}/>
                             </div>
                             <div key='slider-col3' className='slider__col-sm2'>
                                 <SliderButton key='buttonNext' onClick={this.handleClickNext} text="&gt;"/>

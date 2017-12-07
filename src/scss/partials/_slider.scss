@@ -1,9 +1,19 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing: border-box;
+//Placeholders for slider
+%flexCol {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
+%colSet {
+    float: left;
+    min-height: 1px;
+    height:100%;
+}
+
+
+/*Slider components styles settings*/
 .slider {
     height:300px;
     width:100%;
@@ -23,24 +33,14 @@
             display:block;
         }
         .slider__col-sm2{
-            float: left;
             width:16.66%;
-            min-height: 1px;
-            height:100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            @extend %flexCol;
+            @extend %colSet;
         }
         .slider__col-sm8{
-            float: left;
             width: 66.66%;
-            min-height: 1px;
-            height:100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            @extend %flexCol;
+            @extend %colSet;
         }
     }
 }
@@ -64,11 +64,8 @@
     list-style: none;
     display: inline-block;
     .slider__item{
-        display: none;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        img {
+        @extend %flexCol;
+        > img {
             border-radius: 50px;
             border: 1px solid black;
             max-width: 100%;

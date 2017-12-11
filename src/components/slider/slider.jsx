@@ -1,9 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; // ES6
 
 document.addEventListener('DOMContentLoaded',function(){
 
+const animals = [
+    'Human characterized by erect posture and bipedal locomotion, high manual dexterity and heavy tool use compared to other animals.',
+    'Rhinocerotidae one of any five extant species of odd-toed ungulates in the family Rhinocerotidae, as well as any of the numerous extinct species.',
+    'Gorillas are ground-dwelling, predominantly herbivorous apes that inhabit the forests of central Sub-Saharan Africa.',
+    'Tiger is largest cat species, most recognizable for their pattern of dark vertical stripes on reddish-orange fur with a lighter underside.',
+    'They are often called house cats when kept as indoor pets or simply cats when there is no need to distinguish them from other felids and felines.',
+    'Leopard  large cat native to the mountain ranges of Central and South Asia. It is listed as Vulnerable on the IUCN Red List of Threatened Species.'
 
+];
 
     //Slider button
     class SliderButton extends React.Component{
@@ -26,7 +35,17 @@ document.addEventListener('DOMContentLoaded',function(){
     class SingleSlide extends React.Component{
         render(){
             return(
-                <img className='slider__slideContent' src={this.props.path}></img>
+                <ReactCSSTransitionGroup
+                    transitionName="slide"
+                    transitionAppear = {true}
+                    transitionAppearTimeout = {500}
+                    transitionEnterTimeout={500}
+                    transitionLeave={false}>
+                    <div key={this.props.path} className='slider__slideContent' style={{backgroundImage:`url(${this.props.path})`}}>
+                        <h1>INHABITANTS OF THE EARTH</h1>
+                        <p>{this.props.text}</p>
+                    </div>
+                </ReactCSSTransitionGroup>
             );
         }
     }
@@ -47,7 +66,7 @@ document.addEventListener('DOMContentLoaded',function(){
             //start slide show
             this.mainSlideShow = setInterval(()=>{
                 this.showNextSlide();
-            },1500);
+            },2500);
         }
         //Handler click event on button previous - previous slide show
         handleClickPrev = () => {
@@ -64,7 +83,7 @@ document.addEventListener('DOMContentLoaded',function(){
             //start slide show
             this.mainSlideShow = setInterval(()=>{
                 this.showNextSlide();
-            },1500);
+            },2500);
         }
         //Method that handle next slide show
         showNextSlide = () => {
@@ -87,13 +106,14 @@ document.addEventListener('DOMContentLoaded',function(){
             //start init slide show
             this.initSlideShow = setInterval(()=>{
                 this.showNextSlide();
-            },1500);
+            },2500);
         }
         componentWillUnmount(){
             this.clearTimers();
         }
         render(){
             let pathToImage=`${this.props.path}${this.state.counter}.${this.props.type}`;
+            let text='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.';
             return(
                 <section className='slider'>
                     <div key='slider-container' className='slider__container'>
@@ -102,7 +122,7 @@ document.addEventListener('DOMContentLoaded',function(){
                                 <SliderButton key='buttonPrev' onClick={this.handleClickPrev} text="&lt;"/>
                             </div>
                             <div key='slider-col2' className='slider__col-sm8'>
-                                <SingleSlide path={pathToImage}/>
+                                <SingleSlide path={pathToImage} text={this.props.slideText[this.state.counter-1]}/>
                             </div>
                             <div key='slider-col3' className='slider__col-sm2'>
                                 <SliderButton key='buttonNext' onClick={this.handleClickNext} text="&gt;"/>
@@ -115,7 +135,7 @@ document.addEventListener('DOMContentLoaded',function(){
     }
 
     ReactDOM.render(
-        <Slider numberOfImages={6} path='./images/' type='jpeg'/>,
+        <Slider numberOfImages={6} path='./images/' type='jpeg' slideText={animals}  / >,
         document.getElementById('app')
     );
 });

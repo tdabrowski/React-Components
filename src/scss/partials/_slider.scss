@@ -13,9 +13,34 @@
 }
 
 
+//simple animation start
+
+.slide-enter {
+  opacity: 0.01;
+}
+
+.slide-enter.slide-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.slide-appear {
+  opacity: 0.01;
+}
+
+.slide-appear.slide-appear-active {
+  opacity: 1;
+  transition: opacity .5s ease-in;
+}
+
+//simple animation end
+
+
+
+
 /*Slider components styles settings*/
 .slider {
-    height:300px;
+    height:400px;
     width:100%;
     background-color: rgb(71, 71, 71);
 }
@@ -33,12 +58,12 @@
             display:block;
         }
         .slider__col-sm2{
-            width:16.66%;
+            width:8.33%;
             @extend %flexCol;
             @extend %colSet;
         }
         .slider__col-sm8{
-            width: 66.66%;
+            width: 83.33%;
             @extend %flexCol;
             @extend %colSet;
         }
@@ -49,8 +74,8 @@
     display: inline-block;
     width: 100%;
     height: 100%;
-    border: none;
     outline: none;
+    border: none;
     padding: 0;
     color:white;
     background-color: transparent;
@@ -58,12 +83,40 @@
     font-size: 50px;
     font-weight: 400;
     font-family: Arial;
+    opacity: 0.1;
+    &:hover {
+        opacity: 1;
+        transition: all 1s;
+    }
 }
 
 
 .slider__slideContent {
-    border-radius: 50px;
-    border: 1px solid black;
-    max-width: 100%;
-    height: auto;
+    max-width:740px;
+    width:100%;
+    min-height: 400px;
+    height:auto;
+    background-repeat:no-repeat;
+    background-size: contain;
+    background-position:center center;
+    @extend %flexCol;
+    justify-content: space-between;
+    h1, p {
+        color: gold;
+        font-family: Arial, sans-serif;
+        display: inline-block;
+    }
+    h1 {
+        font-size: 50px;
+        margin: 20px 10px;
+        text-shadow: 2px 2px #ff0000;
+    }
+    p{
+        font-size: 20px;
+        font-weight: bolder;
+        opacity:0.85;
+        margin:0 20px 40px 20px;
+
+    }
+
 }

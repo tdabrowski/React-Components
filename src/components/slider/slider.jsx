@@ -5,27 +5,38 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; // ES6
 document.addEventListener('DOMContentLoaded',function(){
 
 const animals = [
-    'Human characterized by erect posture and bipedal locomotion, high manual dexterity and heavy tool use compared to other animals.',
-    'Rhinocerotidae one of any five extant species of odd-toed ungulates in the family Rhinocerotidae, as well as any of the numerous extinct species.',
-    'Gorillas are ground-dwelling, predominantly herbivorous apes that inhabit the forests of central Sub-Saharan Africa.',
-    'Tiger is largest cat species, most recognizable for their pattern of dark vertical stripes on reddish-orange fur with a lighter underside.',
-    'They are often called house cats when kept as indoor pets or simply cats when there is no need to distinguish them from other felids and felines.',
-    'Leopard  large cat native to the mountain ranges of Central and South Asia. It is listed as Vulnerable on the IUCN Red List of Threatened Species.'
+    'Human characterized by erect posture and bipedal locomotion, high manual dexterity and heavy tool use compared to other animals',
+    'Rhinocerotidae one of any five extant species of odd-toed ungulates in the family Rhinocerotidae, as well as any of the numerous extinct species',
+    'Gorillas are ground-dwelling, predominantly herbivorous apes that inhabit the forests of central Sub-Saharan Africa',
+    'Tiger is largest cat species, most recognizable for their pattern of dark vertical stripes on reddish-orange fur with a lighter underside',
+    'They are often called house cats when kept as indoor pets or simply cats when there is no need to distinguish them from other felids and felines',
+    'Leopard  large cat native to the mountain ranges of Central and South Asia. It is listed as Vulnerable on the IUCN Red List of Threatened Species'
 
 ];
 
     //Slider button
     class SliderButton extends React.Component{
+        constructor(props){
+            super(props);
+            this.state={control:false};
+        }
         handleClick = () => {
             if(typeof this.props.onClick === 'function'){
                 this.props.onClick();
+                this.setState({control:true});
+                this.buttonDisableTime = setTimeout(()=>{
+                    this.setState({control:false});
+                },1000)
             } else {
                 console.log('Error, It is not a function for button click event handler');
             }
         }
+        componentWillUnmount(){
+            clearTimeout(this.buttonDisableTime);
+        }
         render(){
             return (
-                <button className='slider__button' onClick={this.handleClick}>{this.props.text}</button>
+                <button disabled={this.state.control} className='slider__button' onClick={this.handleClick}>{this.props.text}</button>
             );
         }
     }
@@ -38,25 +49,25 @@ const animals = [
                 <ReactCSSTransitionGroup
                     transitionName="slide"
                     transitionAppear = {true}
-                    transitionAppearTimeout = {500}
-                    transitionEnterTimeout={500}
+                    transitionAppearTimeout = {1000}
+                    transitionEnterTimeout = {1000}
                     transitionLeave={false}>
                     <div key={this.props.path} className='slider__slideContent' style={{backgroundImage:`url(${this.props.path})`}}>
+                        <ReactCSSTransitionGroup
+                            transitionName="headerSlide"
+                            transitionAppear = {true}
+                            transitionAppearTimeout = {2000}
+                            transitionLeave={false}
+                            transitionEnter={false}>
+                            <h1>INHABITANTS OF THE EARTH</h1>
+                        </ReactCSSTransitionGroup>
                         <ReactCSSTransitionGroup
                             transitionName="textSlide"
                             transitionAppear = {true}
                             transitionAppearTimeout = {2000}
-                            transitionEnterTimeout={2000}
-                            transitionLeave={false}>
-                            <h1>INHABITANTS <br/>OF THE EARTH</h1>
-                        </ReactCSSTransitionGroup>
-                        <ReactCSSTransitionGroup
-                            transitionName="slide2"
-                            transitionAppear = {true}
-                            transitionAppearTimeout = {2000}
-                            transitionEnterTimeout={2000}
-                            transitionLeave={false}>
-                            <p key={this.props.text}>{this.props.text}</p>
+                            transitionLeave={false}
+                            transitionEnter={false}>
+                            <p key={this.props.text}>{this.props.text}<a href="#">...</a></p>
                         </ReactCSSTransitionGroup>
                     </div>
                 </ReactCSSTransitionGroup>

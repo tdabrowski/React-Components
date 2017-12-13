@@ -17,64 +17,40 @@
 
 .slide-enter {
   opacity: 0.01;
+  filter: blur(6px);
+  -webkit-filter:blur(6px);
 }
 
 .slide-enter.slide-enter-active {
   opacity: 1;
-  transition: opacity 500ms ease-in;
+  filter: blur(0px);
+  -webkit-filter:blur(0px);
+  transition: all 1s ease-in;
 }
 
 .slide-appear {
   opacity: 0.01;
+  filter: blur(6px);
+  -webkit-filter:blur(6px);
 }
 
 .slide-appear.slide-appear-active {
   opacity: 1;
-  transition: opacity .5s ease-in;
+  filter: blur(0px);
+  -webkit-filter:blur(0px);
+  transition: all 1s ease-in;
 }
 
 
-.textSlide-enter {
+
+
+.headerSlide-appear,.textSlide-appear {
   opacity: 0.01;
-  width: 0%;
 }
 
-.textSlide-enter.textSlide-enter-active {
+.headerSlide-appear.headerSlide-appear-active, .textSlide-appear.textSlide-appear-active  {
   opacity: 1;
-  width:100%;
   transition: all 2s ease-in;
-}
-
-.textSlide-appear {
-  opacity: 0.01;
-  width:0%;
-}
-
-.textSlide-appear.textSlide-appear-active {
-  opacity: 1;
-  width:100%;
-  transition: all 2s ease-in;
-}
-
-
-
-
-.slide2-enter {
-  opacity: 0.01;
-}
-
-.slide2-enter.slide2-enter-active {
-  opacity: 1;
-  transition: opacity 2s ease-in;
-}
-
-.slide2-appear {
-  opacity: 0.01;
-}
-
-.slide2-appear.slide2-appear-active {
-  opacity: 1;
-  transition: opacity 2s ease-in;
 }
 //simple animation end
 
@@ -150,6 +126,7 @@
     background-position:center center;
     @extend %flexCol;
     justify-content: space-between;
+
     h1, p {
         color: white;
         font-family: Arial, sans-serif;
@@ -160,20 +137,31 @@
         font-size: 40px;
         margin: 30px 10px 0 0;
         height: 140px;
-        @media screen and (min-width:458px ){
-            height:120px;
+        @media screen and (min-width:458px ) and (max-width: 881px){
+            height:110px;
+            font-size: 45px;
+        }
+        @media screen and (min-width:882px ){
+            height:60px;
             font-size: 50px;
         }
         display:block;
         overflow: hidden;
     }
     p{
-        font-size: 20px;
+        font-size: 16px;
         font-weight: bolder;
         text-align: center;
         margin: 0 auto;
         margin-bottom:35px;
-        overflow: hidden;
+        @media screen and (min-width:458px ){
+            font-size: 20px;
+        }
+        a{
+            &:link, &:visited, &:hover, &:active{
+                color:white;
+            }
+        }
     }
 
 }

@@ -33,6 +33,49 @@
   transition: opacity .5s ease-in;
 }
 
+
+.textSlide-enter {
+  opacity: 0.01;
+  width: 0%;
+}
+
+.textSlide-enter.textSlide-enter-active {
+  opacity: 1;
+  width:100%;
+  transition: all 2s ease-in;
+}
+
+.textSlide-appear {
+  opacity: 0.01;
+  width:0%;
+}
+
+.textSlide-appear.textSlide-appear-active {
+  opacity: 1;
+  width:100%;
+  transition: all 2s ease-in;
+}
+
+
+
+
+.slide2-enter {
+  opacity: 0.01;
+}
+
+.slide2-enter.slide2-enter-active {
+  opacity: 1;
+  transition: opacity 2s ease-in;
+}
+
+.slide2-appear {
+  opacity: 0.01;
+}
+
+.slide2-appear.slide2-appear-active {
+  opacity: 1;
+  transition: opacity 2s ease-in;
+}
 //simple animation end
 
 
@@ -80,10 +123,13 @@
     color:white;
     background-color: transparent;
     cursor:pointer;
-    font-size: 50px;
+    font-size: 20px;
     font-weight: 400;
     font-family: Arial;
     opacity: 0.1;
+    @media screen and (min-width:458px ){
+        font-size: 50px;
+    }
     &:hover {
         opacity: 1;
         transition: all 1s;
@@ -98,25 +144,36 @@
     height:auto;
     background-repeat:no-repeat;
     background-size: contain;
+    @media screen and (min-width:900px ){
+        background-size: 80% 70%;
+    }
     background-position:center center;
     @extend %flexCol;
     justify-content: space-between;
     h1, p {
-        color: gold;
+        color: white;
         font-family: Arial, sans-serif;
         display: inline-block;
+
     }
     h1 {
-        font-size: 50px;
-        margin: 20px 10px;
-        text-shadow: 2px 2px #ff0000;
+        font-size: 40px;
+        margin: 30px 10px 0 0;
+        height: 140px;
+        @media screen and (min-width:458px ){
+            height:120px;
+            font-size: 50px;
+        }
+        display:block;
+        overflow: hidden;
     }
     p{
         font-size: 20px;
         font-weight: bolder;
-        opacity:0.85;
-        margin:0 20px 40px 20px;
-
+        text-align: center;
+        margin: 0 auto;
+        margin-bottom:35px;
+        overflow: hidden;
     }
 
 }

@@ -42,8 +42,22 @@ const animals = [
                     transitionEnterTimeout={500}
                     transitionLeave={false}>
                     <div key={this.props.path} className='slider__slideContent' style={{backgroundImage:`url(${this.props.path})`}}>
-                        <h1>INHABITANTS OF THE EARTH</h1>
-                        <p>{this.props.text}</p>
+                        <ReactCSSTransitionGroup
+                            transitionName="textSlide"
+                            transitionAppear = {true}
+                            transitionAppearTimeout = {2000}
+                            transitionEnterTimeout={2000}
+                            transitionLeave={false}>
+                            <h1>INHABITANTS <br/>OF THE EARTH</h1>
+                        </ReactCSSTransitionGroup>
+                        <ReactCSSTransitionGroup
+                            transitionName="slide2"
+                            transitionAppear = {true}
+                            transitionAppearTimeout = {2000}
+                            transitionEnterTimeout={2000}
+                            transitionLeave={false}>
+                            <p key={this.props.text}>{this.props.text}</p>
+                        </ReactCSSTransitionGroup>
                     </div>
                 </ReactCSSTransitionGroup>
             );
@@ -66,7 +80,7 @@ const animals = [
             //start slide show
             this.mainSlideShow = setInterval(()=>{
                 this.showNextSlide();
-            },2500);
+            },3500);
         }
         //Handler click event on button previous - previous slide show
         handleClickPrev = () => {
@@ -83,7 +97,7 @@ const animals = [
             //start slide show
             this.mainSlideShow = setInterval(()=>{
                 this.showNextSlide();
-            },2500);
+            },3500);
         }
         //Method that handle next slide show
         showNextSlide = () => {
@@ -106,7 +120,7 @@ const animals = [
             //start init slide show
             this.initSlideShow = setInterval(()=>{
                 this.showNextSlide();
-            },2500);
+            },3500);
         }
         componentWillUnmount(){
             this.clearTimers();

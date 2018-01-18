@@ -1,2 +1,2 @@
 # React-Components
-React.js Components samples for learning and training purposes
+Simple components examples in React.JS

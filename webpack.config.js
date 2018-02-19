@@ -1,5 +1,5 @@
 module.exports	=	{
-	entry:	"./src/components/checkbox/checkbox.jsx",
+	entry:	"./src/components/slider/slider.jsx",
 	output:	{filename:"./js/main.js"	},
 	devtool: 'eval-source-map',
 	watch:	true,
